@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Poppins", serif;
+  
+  --color-brand-blue: #2C4239; /* Primary Deep Green */
+  --color-brand-teal: #6B8E7D; /* Muted Leaf Sage */
+  --color-brand-accent: #A5B8AC; /* Soft Sage Accent */
+  --color-brand-green: #4A6D5F; /* Mid-tone Green */
+  --color-brand-light: #F7F9F8; /* Mint-tinted off-white */
+  --color-brand-soft: #ECF2F0; /* Pale Moss background */
+}
+
+@layer base {
+  body {
+    @apply font-sans text-brand-blue bg-brand-light antialiased selection:bg-brand-teal/20;
+    scroll-behavior: smooth;
+  }
+}
+
+.heading-serif {
+  @apply font-serif tracking-tight leading-tight;
+}
+
+.glass-nav {
+  @apply bg-brand-light/90 backdrop-blur-xl border-b border-brand-blue/5;
+}
+
+.section-padding {
+  @apply py-24 sm:py-32 px-4 sm:px-6 lg:px-8;
+}
+
+.bento-card {
+  @apply bg-white rounded-[32px] md:rounded-[48px] border border-brand-blue/5 shadow-[0_4px_24px_rgba(0,0,0,0.02)] hover:shadow-[0_24px_48px_rgba(0,0,0,0.06)] hover:border-brand-teal/10 transition-all duration-700 ease-out;
+}
+
+.btn-premium {
+  @apply inline-flex items-center justify-center px-10 py-5 rounded-full font-medium tracking-wide transition-all duration-500 overflow-hidden relative;
+}
+
+.editorial-mask {
+  mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+}
+
+.vertical-text {
+  writing-mode: vertical-rl;
+  @apply uppercase tracking-[0.3em] text-[10px] font-bold opacity-30;
+}
+
