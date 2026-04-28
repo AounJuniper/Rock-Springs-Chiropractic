@@ -1,44 +1,44 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Activity } from 'lucide-react';
+import { Menu, X, Activity, Phone, Mail, MapPin } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = [
-    { name: 'Home', href: '/' },
-    { name: 'Services', href: '#services' },
     { name: 'About', href: '#about' },
+    { name: 'Techniques', href: '#techniques' },
     { name: 'Contact', href: '#contact' },
+    { name: 'Book Now', href: '#booking' },
   ];
 
   return (
     <nav className="relative z-[100] bg-white border-b">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         
-        {/* Logo */}
+        {/* Logo Section */}
         <div className="flex items-center space-x-2 cursor-pointer group shrink-0">
-          <div className="p-2 rounded-xl bg-brand-blue text-white">
+          <div className="p-2 rounded-xl bg-[#2a3c35] text-white">
             <Activity className="w-4 h-4 md:w-5 md:h-5" />
           </div>
           <div className="flex flex-col leading-tight">
-            <span className="text-xs md:text-base font-extrabold text-brand-blue whitespace-nowrap">
-              ROCK SPRINGS
+            <span className="text-xs md:text-base font-extrabold text-[#2a3c35] whitespace-nowrap uppercase">
+              Rock Springs
             </span>
-            <span className="text-[8px] md:text-[10px] uppercase tracking-[0.3em] text-brand-teal whitespace-nowrap">
-              CHIROPRACTIC
+            <span className="text-[8px] md:text-[10px] uppercase tracking-[0.3em] text-[#4ade80] whitespace-nowrap font-bold">
+              Chiropractic
             </span>
           </div>
         </div>
 
-        {/* Desktop Nav */}
+        {/* Desktop Navigation */}
         <div className="hidden lg:flex items-center flex-1 justify-end">
           <div className="flex items-center gap-8 xl:gap-12">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="text-[10px] font-black uppercase tracking-[0.25em] text-brand-blue hover:text-brand-teal transition-colors"
+                className="text-[10px] font-black uppercase tracking-[0.25em] text-[#2a3c35] hover:text-[#4ade80] transition-colors"
               >
                 {link.name}
               </a>
@@ -46,17 +46,17 @@ const Navbar = () => {
           </div>
           <a
             href="#booking"
-            className="ml-10 px-8 py-4 bg-brand-blue text-white rounded-2xl text-[11px] font-bold uppercase tracking-widest hover:bg-brand-teal transition-all"
+            className="ml-10 px-8 py-4 bg-[#2a3c35] text-white rounded-2xl text-[11px] font-bold uppercase tracking-widest hover:bg-[#4ade80] transition-all"
           >
             Book Now
           </a>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Toggle */}
         <div className="lg:hidden">
           <button 
             onClick={() => setIsOpen(!isOpen)}
-            className="p-2 text-brand-blue"
+            className="p-2 text-[#2a3c35]"
           >
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -67,7 +67,7 @@ const Navbar = () => {
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Dark Overlay */}
+            {/* Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -76,21 +76,19 @@ const Navbar = () => {
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Sidebar / Drawer */}
+            {/* Sidebar Drawer */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-full sm:w-[400px] bg-white z-[90] flex flex-col shadow-2xl"
+              className="fixed top-0 right-0 bottom-0 w-full sm:w-[420px] bg-white z-[90] flex flex-col shadow-2xl"
             >
-              {/* Sidebar Header */}
+              {/* Drawer Header */}
               <div className="p-6 flex justify-between items-center border-b">
                 <div className="flex items-center gap-2">
-                  <Activity className="w-5 h-5 text-brand-blue" />
-                  <span className="font-bold text-brand-blue tracking-tight">
-                    Rock Springs
-                  </span>
+                  <Activity className="w-5 h-5 text-[#2a3c35]" />
+                  <span className="font-bold text-[#2a3c35] text-lg">Rock Springs</span>
                 </div>
                 <button 
                   onClick={() => setIsOpen(false)}
@@ -100,18 +98,18 @@ const Navbar = () => {
                 </button>
               </div>
 
-              {/* Main Links Area */}
+              {/* Navigation Links */}
               <div className="flex-1 flex flex-col justify-center px-10">
-                <nav className="space-y-8">
+                <nav className="space-y-6">
                   {navLinks.map((link, i) => (
                     <motion.a
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.1 * i }}
                       key={link.name}
                       href={link.href}
                       onClick={() => setIsOpen(false)}
-                      className="block text-3xl font-bold text-brand-blue hover:text-brand-teal transition-colors"
+                      className="block text-4xl font-bold text-[#2a3c35] hover:text-[#4ade80] transition-colors"
                     >
                       {link.name}
                     </motion.a>
@@ -119,48 +117,47 @@ const Navbar = () => {
                 </nav>
               </div>
 
-              {/* Styled Footer (As per your Image) */}
+              {/* Styled Footer (Based on your Images) */}
               <div className="p-4 mb-4">
-                <div className="bg-[#0e1116] rounded-[2.5rem] p-8 text-white">
-                  <div className="grid grid-cols-2 gap-6 mb-10">
-                    {/* Scheduling Section */}
+                <div className="bg-[#2a3c35] rounded-[2.5rem] p-8 text-white">
+                  <div className="grid grid-cols-2 gap-4 mb-10">
+                    {/* Scheduling */}
                     <div>
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-black mb-3">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-black mb-3">
                         Scheduling
                       </p>
                       <a 
-                        href="tel:55501234567" 
-                        className="text-lg font-medium whitespace-nowrap hover:text-brand-teal transition-colors"
+                        href="tel:3073823090" 
+                        className="text-base sm:text-lg font-bold whitespace-nowrap hover:text-[#4ade80] transition-colors"
                       >
-                        (555) 0123-4567
+                        (307) 382-3090
                       </a>
                     </div>
 
-                    {/* Enquiries Section */}
+                    {/* Enquiries */}
                     <div>
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-gray-500 font-black mb-3">
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-black mb-3">
                         Enquiries
                       </p>
                       <a 
-                        href="mailto:hello@example.com" 
-                        className="text-lg font-medium border-b border-white/20 pb-1 hover:text-brand-teal transition-colors inline-block"
+                        href="mailto:info@rockspringschiro.com" 
+                        className="text-base sm:text-lg font-bold border-b border-white/20 pb-0.5 hover:text-[#4ade80] transition-colors inline-block"
                       >
                         Email Us
                       </a>
                     </div>
                   </div>
 
-                  {/* Secure Your Booking Button */}
+                  {/* CTA Button */}
                   <a
                     href="#booking"
                     onClick={() => setIsOpen(false)}
-                    className="block w-full py-5 bg-white text-black text-center rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] hover:bg-brand-teal hover:text-white transition-all duration-300"
+                    className="block w-full py-5 bg-[#4ade80] text-[#1a2823] text-center rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] hover:brightness-105 active:scale-[0.98] transition-all duration-300 shadow-lg shadow-black/20"
                   >
                     Secure Your Booking
                   </a>
                 </div>
               </div>
-
             </motion.div>
           </>
         )}
