@@ -16,11 +16,12 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
+  // Lock scroll when menu open
   useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : 'unset';
-    return () => (document.body.style.overflow = 'unset');
+    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
   }, [isOpen]);
 
+  // Scroll effect
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
@@ -32,7 +33,7 @@ export default function Navbar() {
       {/* ================= NAVBAR ================= */}
       <nav
         className={cn(
-          'fixed top-0 left-0 right-0 transition-all duration-300 z-[100]',
+          'fixed top-0 left-0 right-0 transition-all duration-300 z-50',
           isScrolled
             ? 'bg-white/90 backdrop-blur-xl border-b border-slate-100 py-3 md:py-4 shadow-sm'
             : 'bg-transparent py-6 md:py-8'
@@ -85,6 +86,7 @@ export default function Navbar() {
                 {isOpen ? <X /> : <Menu />}
               </button>
             </div>
+
           </div>
         </div>
       </nav>
@@ -98,7 +100,7 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 w-screen h-screen bg-black/70 backdrop-blur-md z-[999]"
+              className="fixed inset-0 bg-black/70 backdrop-blur-md z-[80]"
               onClick={() => setIsOpen(false)}
             />
 
@@ -108,13 +110,15 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25 }}
-              className="fixed top-0 right-0 bottom-0 w-full md:w-[380px] bg-white z-[1000] flex flex-col"
+              className="fixed top-0 right-0 bottom-0 w-full md:w-[380px] bg-white z-[90] flex flex-col"
             >
               {/* Header */}
               <div className="p-6 flex justify-between items-center border-b">
                 <div className="flex items-center gap-2">
                   <Activity className="w-5 h-5 text-brand-blue" />
-                  <span className="font-bold text-brand-blue">Rock Springs</span>
+                  <span className="font-bold text-brand-blue">
+                    Rock Springs
+                  </span>
                 </div>
 
                 <button onClick={() => setIsOpen(false)}>
@@ -138,7 +142,7 @@ export default function Navbar() {
                 </nav>
               </div>
 
-              {/* Footer */}
+              {/* Footer inside menu */}
               <div className="p-6 bg-brand-blue text-white">
                 <p>(307) 382-3090</p>
               </div>
