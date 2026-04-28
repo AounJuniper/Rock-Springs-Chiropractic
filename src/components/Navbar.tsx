@@ -9,7 +9,6 @@ const navLinks = [
   { name: 'Expect', href: '#how-it-works' },
   { name: 'FAQ', href: '#faq' },
   { name: 'Testimonials', href: '#testimonials' },
-  
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -31,7 +30,8 @@ export default function Navbar() {
   return (
     <nav
       className={cn(
-        'fixed top-0 left-0 right-0 z-[100] transition-all duration-300',
+        'fixed top-0 left-0 right-0 transition-all duration-300',
+        isOpen ? 'z-[110]' : 'z-[100]',
         isScrolled
           ? 'bg-white/90 backdrop-blur-xl border-b border-slate-100 py-3 md:py-4 shadow-sm'
           : 'bg-transparent py-6 md:py-8'
@@ -40,17 +40,17 @@ export default function Navbar() {
       <div className="max-w-[1400px] w-full mx-auto px-6 md:px-10">
         <div className="flex justify-between items-center">
 
-          {/* 🔷 Logo (Icon + Text) */}
-          <div className="flex items-center space-x-2 cursor-pointer group">
+          {/* 🔷 Logo */}
+          <div className="flex items-center space-x-2 cursor-pointer group shrink-0">
             <div className="p-2 rounded-xl bg-brand-blue text-white transition-all group-hover:bg-brand-teal group-hover:scale-110">
-              <Activity className="w-5 h-5" />
+              <Activity className="w-4 h-4 md:w-5 md:h-5" />
             </div>
 
             <div className="flex flex-col leading-tight">
-              <span className="text-sm md:text-base font-extrabold tracking-wide text-brand-blue">
+              <span className="text-xs md:text-base font-extrabold tracking-wide text-brand-blue whitespace-nowrap">
                 ROCK SPRINGS
               </span>
-              <span className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-brand-teal">
+              <span className="text-[8px] md:text-[10px] uppercase tracking-[0.3em] text-brand-teal whitespace-nowrap">
                 CHIROPRACTIC
               </span>
             </div>
@@ -58,8 +58,6 @@ export default function Navbar() {
 
           {/* Desktop Nav */}
           <div className="hidden lg:flex items-center flex-1 justify-end">
-
-            {/* Links */}
             <div className="flex items-center gap-8 xl:gap-12">
               {navLinks.map((link) => (
                 <a
@@ -73,7 +71,6 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Button */}
             <a
               href="#booking"
               className="ml-10 px-8 py-4 bg-brand-blue text-white rounded-2xl text-[11px] font-bold uppercase tracking-widest hover:bg-brand-teal transition-all shadow-xl shadow-brand-blue/10 hover:-translate-y-1 active:scale-95 whitespace-nowrap"
@@ -82,7 +79,7 @@ export default function Navbar() {
             </a>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile Button */}
           <div className="lg:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -103,7 +100,7 @@ export default function Navbar() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-brand-blue/20 backdrop-blur-sm z-[60] lg:hidden"
+              className="fixed inset-0 bg-black/60 backdrop-blur-md z-[120] lg:hidden"
               onClick={() => setIsOpen(false)}
             />
 
@@ -113,13 +110,13 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 30, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-full md:w-[380px] bg-white z-[70] lg:hidden shadow-[-20px_0_60px_rgba(0,0,0,0.1)] flex flex-col"
+              className="fixed top-0 right-0 bottom-0 w-full md:w-[380px] bg-white z-[130] lg:hidden shadow-[-20px_0_60px_rgba(0,0,0,0.1)] flex flex-col"
             >
               {/* Header */}
-              <div className="p-8 flex justify-between items-center border-b border-slate-50">
+              <div className="p-6 flex justify-between items-center border-b border-slate-50">
                 <div className="flex items-center space-x-2">
                   <Activity className="w-5 h-5 text-brand-blue" />
-                  <span className="text-lg font-bold text-brand-blue">
+                  <span className="text-base font-bold text-brand-blue">
                     Rock Springs
                   </span>
                 </div>
@@ -133,8 +130,8 @@ export default function Navbar() {
               </div>
 
               {/* Links */}
-              <div className="flex-1 overflow-y-auto px-8 py-12 flex flex-col justify-center">
-                <nav className="space-y-5">
+              <div className="flex-1 overflow-y-auto px-8 py-10 flex flex-col justify-center">
+                <nav className="space-y-6">
                   {navLinks.map((link, idx) => (
                     <motion.a
                       key={link.name}
@@ -145,7 +142,7 @@ export default function Navbar() {
                       onClick={() => setIsOpen(false)}
                       className="block group"
                     >
-                      <span className="text-3xl font-serif text-brand-blue group-hover:pl-4 transition-all duration-500">
+                      <span className="text-xl sm:text-2xl font-serif text-brand-blue group-hover:pl-4 transition-all duration-500">
                         {link.name}
                       </span>
                     </motion.a>
@@ -154,11 +151,11 @@ export default function Navbar() {
               </div>
 
               {/* Footer */}
-              <div className="p-10 bg-brand-blue text-white rounded-t-[60px]">
-                <div className="space-y-8">
+              <div className="p-8 bg-brand-blue text-white rounded-t-[40px]">
+                <div className="space-y-6">
                   <div className="grid grid-cols-2 gap-6">
                     <div>
-                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 mb-3">
+                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 mb-2">
                         Scheduling
                       </h4>
                       <a href="tel:3073823090" className="block text-sm">
@@ -167,7 +164,7 @@ export default function Navbar() {
                     </div>
 
                     <div>
-                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 mb-3">
+                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 mb-2">
                         Enquiries
                       </h4>
                       <a href="mailto:info@rockspringschiro.com" className="block text-sm underline">
@@ -179,7 +176,7 @@ export default function Navbar() {
                   <a
                     href="#booking"
                     onClick={() => setIsOpen(false)}
-                    className="block w-full py-5 bg-white text-brand-blue text-center rounded-2xl font-bold uppercase tracking-widest text-[11px] hover:bg-brand-teal hover:text-white transition-all active:scale-95"
+                    className="block w-full py-4 bg-white text-brand-blue text-center rounded-2xl font-bold uppercase tracking-widest text-[11px] hover:bg-brand-teal hover:text-white transition-all active:scale-95"
                   >
                     Secure Your Booking
                   </a>
