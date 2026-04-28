@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Heart } from 'lucide-react';
+import { Menu, X, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 
@@ -17,159 +17,135 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
+    document.body.style.overflow = isOpen ? 'hidden' : 'unset';
+    return () => (document.body.style.overflow = 'unset');
   }, [isOpen]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <nav
-      className={cn(
-        'fixed top-0 left-0 right-0 z-[100] transition-all duration-300',
-        isScrolled ? 'bg-white/90 backdrop-blur-xl border-b border-slate-100 py-3 md:py-4 shadow-sm' : 'bg-transparent py-6 md:py-8'
-      )}
-    >
-      <div className="w-[90%] mx-auto">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center space-x-3 group cursor-pointer">
-            <div className="w-10 h-10 md:w-12 md:h-12 bg-brand-blue rounded-2xl flex items-center justify-center transition-transform group-hover:-rotate-12">
-              <Heart className="w-5 h-5 md:w-6 md:h-6 text-brand-teal" />
-            </div>
-              <span className="text-xs md:text-base font-extrabold text-brand-blue whitespace-nowrap">
+    <>
+      {/* ================= NAVBAR ================= */}
+      <nav
+        className={cn(
+          'fixed top-0 left-0 right-0 transition-all duration-300 z-[100]',
+          isScrolled
+            ? 'bg-white/90 backdrop-blur-xl border-b border-slate-100 py-3 md:py-4 shadow-sm'
+            : 'bg-transparent py-6 md:py-8'
+        )}
+      >
+        <div className="max-w-[1400px] w-full mx-auto px-6 md:px-10">
+          <div className="flex justify-between items-center">
+
+            {/* Logo */}
+            <div className="flex items-center space-x-2 cursor-pointer group shrink-0">
+              <div className="p-2 rounded-xl bg-brand-blue text-white">
+                <Activity className="w-4 h-4 md:w-5 md:h-5" />
+              </div>
+
+              <div className="flex flex-col leading-tight">
+                <span className="text-xs md:text-base font-extrabold text-brand-blue whitespace-nowrap">
                   ROCK SPRINGS
                 </span>
                 <span className="text-[8px] md:text-[10px] uppercase tracking-[0.3em] text-brand-teal whitespace-nowrap">
                   CHIROPRACTIC
                 </span>
-          </div>
-
-          {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center space-x-12">
-            <div className="flex items-center space-x-10">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-[10px] font-black uppercase tracking-[0.25em] text-brand-blue hover:text-brand-teal transition-all relative group"
-                >
-                  {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-teal transition-all group-hover:w-full" />
-                </a>
-              ))}
+              </div>
             </div>
-            <a
-              href="#booking"
-              className="px-8 py-4 bg-brand-blue text-white rounded-2xl text-[11px] font-bold uppercase tracking-widest hover:bg-brand-teal transition-all shadow-xl shadow-brand-blue/10 hover:-translate-y-1 active:scale-95"
-            >
-              Book Appointment
-            </a>
-          </div>
 
+            {/* Desktop Nav */}
+            <div className="hidden lg:flex items-center flex-1 justify-end">
+              <div className="flex items-center gap-8 xl:gap-12">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    className="text-[10px] font-black uppercase tracking-[0.25em] text-brand-blue hover:text-brand-teal"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </div>
 
-          {/* Mobile Menu Button */}
-          <div className="lg:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 text-slate-600 hover:text-brand-blue"
-            >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </button>
+              <a
+                href="#booking"
+                className="ml-10 px-8 py-4 bg-brand-blue text-white rounded-2xl text-[11px] font-bold uppercase tracking-widest"
+              >
+                Book Now
+              </a>
+            </div>
+
+            {/* Mobile Button */}
+            <div className="lg:hidden">
+              <button onClick={() => setIsOpen(!isOpen)}>
+                {isOpen ? <X /> : <Menu />}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Nav */}
+      {/* ================= MOBILE MENU ================= */}
       <AnimatePresence>
         {isOpen && (
           <>
+            {/* Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-brand-blue/20 backdrop-blur-sm z-[60] lg:hidden"
+              className="fixed inset-0 w-screen h-screen bg-black/70 backdrop-blur-md z-[999]"
               onClick={() => setIsOpen(false)}
             />
+
+            {/* Sidebar */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 200, mass: 0.8 }}
-              className="fixed top-0 right-0 bottom-0 w-full md:w-[380px] bg-white z-[70] lg:hidden shadow-[-20px_0_60px_rgba(0,0,0,0.1)] flex flex-col"
+              transition={{ type: 'spring', damping: 25 }}
+              className="fixed top-0 right-0 bottom-0 w-full md:w-[380px] bg-white z-[1000] flex flex-col"
             >
-              <div className="p-8 flex justify-between items-center border-b border-slate-50">
-                <div className="flex items-center space-x-2">
-                  <Heart className="w-5 h-5 text-brand-teal" />
-                  <span className="text-xl font-serif font-bold text-brand-blue tracking-tight">Lumina</span>
+              {/* Header */}
+              <div className="p-6 flex justify-between items-center border-b">
+                <div className="flex items-center gap-2">
+                  <Activity className="w-5 h-5 text-brand-blue" />
+                  <span className="font-bold text-brand-blue">Rock Springs</span>
                 </div>
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="w-10 h-10 rounded-full bg-brand-soft flex items-center justify-center text-brand-blue hover:bg-brand-blue hover:text-white transition-all transform active:scale-90"
-                >
-                  <X className="w-5 h-5" />
+
+                <button onClick={() => setIsOpen(false)}>
+                  <X />
                 </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto px-8 py-12 flex flex-col justify-center">
-                <nav className="space-y-4">
-                  {navLinks.map((link, idx) => (
-                    <motion.a
+              {/* Links */}
+              <div className="flex-1 flex items-center justify-center">
+                <nav className="space-y-6 text-center">
+                  {navLinks.map((link) => (
+                    <a
                       key={link.name}
                       href={link.href}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 + idx * 0.05 }}
                       onClick={() => setIsOpen(false)}
-                      className="block group"
+                      className="block text-xl font-semibold text-brand-blue"
                     >
-                      <div className="flex items-center">
-                        <span className="text-3xl font-serif text-brand-blue group-hover:pl-4 transition-all duration-500">
-                          {link.name}
-                        </span>
-                      </div>
-                    </motion.a>
+                      {link.name}
+                    </a>
                   ))}
                 </nav>
               </div>
 
-              <div className="p-10 bg-brand-blue text-white rounded-t-[60px] shadow-[0_-20px_40px_rgba(12,16,20,0.1)]">
-                <div className="space-y-8">
-                  <div className="grid grid-cols-2 gap-6">
-                    <div>
-                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 mb-3">Scheduling</h4>
-                      <a href="tel:55501234567" className="block text-sm font-medium hover:text-brand-teal transition-colors">(555) 0123-4567</a>
-                    </div>
-                    <div>
-                      <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 mb-3">Enquiries</h4>
-                      <a href="mailto:hello@lumina.chiro" className="block text-sm font-medium hover:text-brand-teal transition-colors underline underline-offset-4 decoration-white/20">Email Us</a>
-                    </div>
-                  </div>
-                  
-                  <a
-                    href="#booking"
-                    onClick={() => setIsOpen(false)}
-                    className="block w-full py-5 bg-white text-brand-blue text-center rounded-2xl font-bold uppercase tracking-widest text-[11px] hover:bg-brand-teal hover:text-white transition-all shadow-xl active:scale-95"
-                  >
-                    Secure Your Booking
-                  </a>
-                </div>
+              {/* Footer */}
+              <div className="p-6 bg-brand-blue text-white">
+                <p>(307) 382-3090</p>
               </div>
             </motion.div>
           </>
         )}
       </AnimatePresence>
-    </nav>
+    </>
   );
 }
