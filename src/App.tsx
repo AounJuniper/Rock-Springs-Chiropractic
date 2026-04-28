@@ -6,7 +6,6 @@ import HowItWorks from './components/HowItWorks';
 import About from './components/About';
 import Services from './components/Services';
 import Testimonials from './components/Testimonials';
-
 import FrequentlyAskedQuestions from './components/FaqSection';
 import OfferSection from './components/OfferSection';
 import BookingForm from './components/BookingForm';
