@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Activity, Phone, Mail, MapPin } from 'lucide-react';
+import { Menu, X, Activity } from 'lucide-react';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,10 +54,7 @@ const Navbar = () => {
 
         {/* Mobile Menu Toggle */}
         <div className="lg:hidden">
-          <button 
-            onClick={() => setIsOpen(!isOpen)}
-            className="p-2 text-[#2a3c35]"
-          >
+          <button onClick={() => setIsOpen(!isOpen)} className="p-2 text-[#2a3c35]">
             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
@@ -82,34 +79,31 @@ const Navbar = () => {
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-full sm:w-[420px] bg-white z-[90] flex flex-col shadow-2xl"
+              className="fixed top-0 right-0 bottom-0 w-full sm:w-[400px] bg-white z-[90] flex flex-col shadow-2xl"
             >
               {/* Drawer Header */}
               <div className="p-6 flex justify-between items-center border-b">
                 <div className="flex items-center gap-2">
                   <Activity className="w-5 h-5 text-[#2a3c35]" />
-                  <span className="font-bold text-[#2a3c35] text-lg">Rock Springs</span>
+                  <span className="font-bold text-[#2a3c35] text-base">Rock Springs</span>
                 </div>
-                <button 
-                  onClick={() => setIsOpen(false)}
-                  className="p-2 hover:bg-gray-100 rounded-full transition-colors"
-                >
+                <button onClick={() => setIsOpen(false)} className="p-2">
                   <X className="w-6 h-6 text-gray-500" />
                 </button>
               </div>
 
-              {/* Navigation Links */}
+              {/* Reduced Font Size Nav Links */}
               <div className="flex-1 flex flex-col justify-center px-10">
                 <nav className="space-y-6">
                   {navLinks.map((link, i) => (
                     <motion.a
-                      initial={{ opacity: 0, x: 20 }}
+                      initial={{ opacity: 0, x: 10 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.1 * i }}
+                      transition={{ delay: 0.05 * i }}
                       key={link.name}
                       href={link.href}
                       onClick={() => setIsOpen(false)}
-                      className="block text-4xl font-bold text-[#2a3c35] hover:text-[#4ade80] transition-colors"
+                      className="block text-2xl font-bold text-[#2a3c35] hover:text-[#4ade80] transition-colors"
                     >
                       {link.name}
                     </motion.a>
@@ -117,18 +111,18 @@ const Navbar = () => {
                 </nav>
               </div>
 
-              {/* Styled Footer (Based on your Images) */}
+              {/* Updated Footer Section */}
               <div className="p-4 mb-4">
                 <div className="bg-[#2a3c35] rounded-[2.5rem] p-8 text-white">
-                  <div className="grid grid-cols-2 gap-4 mb-10">
+                  <div className="grid grid-cols-2 gap-4 mb-8">
                     {/* Scheduling */}
                     <div>
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-black mb-3">
+                      <p className="text-[9px] uppercase tracking-[0.2em] text-white/50 font-black mb-2">
                         Scheduling
                       </p>
                       <a 
                         href="tel:3073823090" 
-                        className="text-base sm:text-lg font-bold whitespace-nowrap hover:text-[#4ade80] transition-colors"
+                        className="text-sm font-bold hover:text-[#4ade80] transition-colors"
                       >
                         (307) 382-3090
                       </a>
@@ -136,23 +130,23 @@ const Navbar = () => {
 
                     {/* Enquiries */}
                     <div>
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/50 font-black mb-3">
+                      <p className="text-[9px] uppercase tracking-[0.2em] text-white/50 font-black mb-2">
                         Enquiries
                       </p>
                       <a 
                         href="mailto:info@rockspringschiro.com" 
-                        className="text-base sm:text-lg font-bold border-b border-white/20 pb-0.5 hover:text-[#4ade80] transition-colors inline-block"
+                        className="text-sm font-bold border-b border-white/20 pb-0.5 hover:text-[#4ade80] transition-colors inline-block"
                       >
                         Email Us
                       </a>
                     </div>
                   </div>
 
-                  {/* CTA Button */}
+                  {/* Secure Your Booking Button */}
                   <a
                     href="#booking"
                     onClick={() => setIsOpen(false)}
-                    className="block w-full py-5 bg-[#4ade80] text-[#1a2823] text-center rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] hover:brightness-105 active:scale-[0.98] transition-all duration-300 shadow-lg shadow-black/20"
+                    className="block w-full py-4 bg-[#4ade80] text-[#1a2823] text-center rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] hover:brightness-105 active:scale-[0.98] transition-all"
                   >
                     Secure Your Booking
                   </a>
