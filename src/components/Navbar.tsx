@@ -48,9 +48,12 @@ export default function Navbar() {
             <div className="w-10 h-10 md:w-12 md:h-12 bg-brand-blue rounded-2xl flex items-center justify-center transition-transform group-hover:-rotate-12">
               <Heart className="w-5 h-5 md:w-6 md:h-6 text-brand-teal" />
             </div>
-            <span className="text-xl md:text-2xl font-bold tracking-tight text-brand-blue">
-              Lumina.
-            </span>
+              <span className="text-xs md:text-base font-extrabold text-brand-blue whitespace-nowrap">
+                  ROCK SPRINGS
+                </span>
+                <span className="text-[8px] md:text-[10px] uppercase tracking-[0.3em] text-brand-teal whitespace-nowrap">
+                  CHIROPRACTIC
+                </span>
           </div>
 
           {/* Desktop Nav */}
