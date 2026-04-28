@@ -26,7 +26,6 @@ export default function App() {
         <About />
         <Testimonials />
         <FrequentlyAskedQuestions />
-        <PatientForms />
         <OfferSection />
         <BookingForm />
         <Contact />
