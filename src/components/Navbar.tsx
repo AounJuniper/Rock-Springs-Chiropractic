@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 
@@ -40,11 +40,20 @@ export default function Navbar() {
       <div className="max-w-[1400px] w-full mx-auto px-6 md:px-10">
         <div className="flex justify-between items-center">
 
-          {/* Logo */}
-          <div className="flex items-center space-x-3 cursor-pointer">
-            <span className="text-xl md:text-2xl font-bold tracking-tight text-brand-blue whitespace-nowrap">
-              Rock Springs <span className="text-brand-teal">Chiropractic</span>
-            </span>
+          {/* 🔷 Logo (Icon + Text) */}
+          <div className="flex items-center space-x-2 cursor-pointer group">
+            <div className="p-2 rounded-xl bg-brand-blue text-white transition-all group-hover:bg-brand-teal group-hover:scale-110">
+              <Activity className="w-5 h-5" />
+            </div>
+
+            <div className="flex flex-col leading-tight">
+              <span className="text-sm md:text-base font-extrabold tracking-wide text-brand-blue">
+                ROCK SPRINGS
+              </span>
+              <span className="text-[9px] md:text-[10px] uppercase tracking-[0.3em] text-brand-teal">
+                CHIROPRACTIC
+              </span>
+            </div>
           </div>
 
           {/* Desktop Nav */}
@@ -108,9 +117,12 @@ export default function Navbar() {
             >
               {/* Header */}
               <div className="p-8 flex justify-between items-center border-b border-slate-50">
-                <span className="text-xl font-serif font-bold text-brand-blue">
-                  Rock Springs Chiropractic
-                </span>
+                <div className="flex items-center space-x-2">
+                  <Activity className="w-5 h-5 text-brand-blue" />
+                  <span className="text-lg font-bold text-brand-blue">
+                    Rock Springs
+                  </span>
+                </div>
 
                 <button
                   onClick={() => setIsOpen(false)}
@@ -158,10 +170,7 @@ export default function Navbar() {
                       <h4 className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40 mb-3">
                         Enquiries
                       </h4>
-                      <a
-                        href="mailto:info@rockspringschiro.com"
-                        className="block text-sm underline"
-                      >
+                      <a href="mailto:info@rockspringschiro.com" className="block text-sm underline">
                         Email Us
                       </a>
                     </div>
