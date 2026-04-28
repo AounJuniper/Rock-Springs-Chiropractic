@@ -77,7 +77,7 @@ export default function Hero() {
             <div className="relative group w-full flex justify-center">
               <div className="relative w-full max-w-[320px] sm:max-w-[400px] lg:max-w-[500px] aspect-[4/5] rounded-[40px] md:rounded-[120px_40px_120px_40px] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)] z-10 border-8 md:border-[12px] border-white ring-1 ring-brand-blue/5">
                 <img
-                  src="src\assets\re.png"
+                  src="https://github.com/AounJuniper/Rock-Springs-Chiropractic/blob/main/src/assets/re.png?raw=true"
                   alt="Dr. Rebecca Vessels"
                   className="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-1000"
                   loading="eager"
