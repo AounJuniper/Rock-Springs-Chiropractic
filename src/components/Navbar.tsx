@@ -17,23 +17,17 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  // Prevent scroll when mobile menu is open
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
+    return () => { document.body.style.overflow = 'unset'; };
   }, [isOpen]);
 
-  // Handle scroll effect
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => { setIsScrolled(window.scrollY > 20); };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -43,7 +37,7 @@ export default function Navbar() {
       className={cn(
         'fixed top-0 left-0 right-0 z-[100] transition-all duration-300',
         isScrolled 
-          ? 'bg-white border-b border-slate-100 py-3 md:py-4 shadow-sm' 
+          ? 'bg-white border-b border-slate-100 py-3 shadow-sm' 
           : 'bg-transparent py-6 md:py-8'
       )}
     >
@@ -103,7 +97,6 @@ export default function Navbar() {
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Backdrop Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -112,15 +105,14 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
             />
 
-            {/* Sidebar Drawer */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-full sm:w-[400px] bg-white z-[120] flex flex-col shadow-2xl overflow-hidden"
+              className="fixed top-0 right-0 bottom-0 w-full sm:w-[380px] bg-white z-[120] flex flex-col shadow-2xl overflow-hidden"
             >
-              {/* Drawer Header - Name Visible Here */}
+              {/* Drawer Header */}
               <div className="p-6 flex justify-between items-center border-b border-slate-100">
                 <div className="flex items-center space-x-3">
                   <div className="p-1.5 rounded-lg bg-[#2a3c35] text-white">
@@ -139,9 +131,9 @@ export default function Navbar() {
                 </button>
               </div>
 
-              {/* Navigation Links */}
-              <div className="flex-1 overflow-y-auto px-10 py-12 flex flex-col justify-center">
-                <nav className="space-y-6">
+              {/* Reduced Font Size Nav Links */}
+              <div className="flex-1 overflow-y-auto px-10 py-8">
+                <nav className="flex flex-col space-y-5">
                   {navLinks.map((link, idx) => (
                     <motion.a
                       key={link.name}
@@ -150,7 +142,7 @@ export default function Navbar() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: idx * 0.05 }}
                       onClick={() => setIsOpen(false)}
-                      className="block text-2xl font-bold text-[#2a3c35] hover:text-[#4ade80] transition-colors"
+                      className="block text-xl font-bold text-[#2a3c35] hover:text-[#4ade80] transition-colors"
                     >
                       {link.name}
                     </motion.a>
@@ -159,18 +151,18 @@ export default function Navbar() {
               </div>
 
               {/* Drawer Footer (Green Theme) */}
-              <div className="p-4 mb-4">
-                <div className="bg-[#2a3c35] rounded-[2.5rem] p-8 text-white shadow-2xl">
-                  <div className="grid grid-cols-2 gap-4 mb-8">
+              <div className="p-4 mb-2">
+                <div className="bg-[#2a3c35] rounded-[2.5rem] p-6 text-white">
+                  <div className="grid grid-cols-2 gap-4 mb-6">
                     <div>
-                      <h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-white/40 mb-2">Scheduling</h4>
-                      <a href="tel:3073823090" className="text-sm font-bold hover:text-[#4ade80] transition-colors">
+                      <h4 className="text-[8px] font-black uppercase tracking-[0.2em] text-white/40 mb-2">Scheduling</h4>
+                      <a href="tel:3073823090" className="text-xs font-bold hover:text-[#4ade80] transition-colors">
                         (307) 382-3090
                       </a>
                     </div>
                     <div>
-                      <h4 className="text-[9px] font-black uppercase tracking-[0.2em] text-white/40 mb-2">Enquiries</h4>
-                      <a href="mailto:info@rockspringschiro.com" className="text-sm font-bold border-b border-white/20 pb-0.5 hover:text-[#4ade80] transition-colors">
+                      <h4 className="text-[8px] font-black uppercase tracking-[0.2em] text-white/40 mb-2">Enquiries</h4>
+                      <a href="mailto:info@rockspringschiro.com" className="text-xs font-bold border-b border-white/20 pb-0.5 hover:text-[#4ade80] transition-colors">
                         Email Us
                       </a>
                     </div>
