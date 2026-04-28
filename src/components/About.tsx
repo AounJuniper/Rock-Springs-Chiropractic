@@ -72,7 +72,7 @@ export default function About() {
           >
             <div className="relative z-10 rounded-[48px] overflow-hidden shadow-[0_50px_100px_-20px_rgba(12,16,20,0.2)]">
               <img
-                src="src/assets/re.png"
+                src="https://github.com/AounJuniper/Rock-Springs-Chiropractic/blob/main/src/assets/re.png?raw=true"
                 alt="Chiropractic Care Professional"
                 loading="lazy"
                 decoding="async"
